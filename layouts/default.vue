@@ -24,6 +24,10 @@ html {
   box-sizing: border-box;
 }
 
+ul {
+  padding: 0;
+}
+
 *,
 *::before,
 *::after {
