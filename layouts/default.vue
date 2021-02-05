@@ -7,7 +7,7 @@
 <style>
 html {
   font-family:
-    'Source Sans Pro',
+    'Poppins',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -24,8 +24,8 @@ html {
   box-sizing: border-box;
 }
 
-ul {
-  padding: 0;
+* {
+  --primary: #F44336;
 }
 
 *,
@@ -35,32 +35,25 @@ ul {
   margin: 0;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+ul {
+  padding: 0;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+input, textarea {
+  max-width: 100%;
+  border: none;
+  padding: 12px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+
 </style>
