@@ -61,6 +61,12 @@ export default {
 .info-local a {
   font-weight: bold;
   font-size: 1.25rem;
+  cursor: pointer;
+  color:  var(--tertiary);
+}
+
+.info-local a:hover {
+text-decoration: underline;
 }
 
 .star-rating {
