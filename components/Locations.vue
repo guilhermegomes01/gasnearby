@@ -79,10 +79,11 @@ export default {
     }
   },
   data() {
+    const favoriteLocationStorage = localStorage.getItem("@gas-nearby:favorites");
     return {
       backList: "",
       activeList: "locations",
-      favoriteLocations: [],
+      favoriteLocations: favoriteLocationStorage ? favoriteLocationStorage : [],
       actualLocation: {}
     };
   },
@@ -108,6 +109,14 @@ export default {
     },
     setActualLocation(location) {
       this.actualLocation = location;
+    }
+  },
+  watch: {
+    favoriteLocations() {
+      localStorage.setItem(
+        "@gas-nearby:favorites",
+        JSON.stringify(this.favoriteLocations)
+      );
     }
   }
 };
