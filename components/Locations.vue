@@ -79,7 +79,7 @@ export default {
     }
   },
   data() {
-    const favoriteLocationStorage = localStorage.getItem("@gas-nearby:favorites");
+    const favoriteLocationStorage = JSON.parse(localStorage.getItem("@gas-nearby:favorites"));
     return {
       backList: "",
       activeList: "locations",

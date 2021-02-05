@@ -88,15 +88,16 @@ export default {
   },
   data() {
     const personalRatingStorage = JSON.parse(localStorage.getItem("@gas-nearby:personalRating"));
-    const { title, rating, comment, isEmpty, showError } = personalRatingStorage;
+
+    // const { title, rating, comment, isEmpty, showError } = personalRatingStorage;
 
     return {
       personalRating: {
-        isEmpty,
-        showError,
-        title,
-        rating,
-        comment
+        isEmpty: personalRatingStorage ? personalRatingStorage.isEmpty : true,
+        showError: personalRatingStorage ? personalRatingStorage.showError : false,
+        title: personalRatingStorage ? personalRatingStorage.title : '',
+        rating: personalRatingStorage ? personalRatingStorage.rating : 0,
+        comment: personalRatingStorage ? personalRatingStorage.comment : ''
       },
     };
   },
@@ -142,6 +143,11 @@ export default {
   background: transparent;
   border: 1px solid #FF5F5F;
   color: #FF5F5F;
+  transition: .7s;
+}
+
+.back-button:hover {
+  background-color: #dc004e0a;
 }
 
 .back-button svg {
@@ -177,6 +183,11 @@ export default {
   font-weight: 600;
   padding: 8px 24px;
   margin-top: 12px;
+  transition: .7s;
+}
+
+.form .send-rating:hover, .edit-rating:hover {
+  background-color: #9a0036;
 }
 
 .personal-rating {
