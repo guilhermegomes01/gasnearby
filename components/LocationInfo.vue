@@ -1,15 +1,15 @@
 <template>
-  <div class="info-local">
-    <div class="info">
+  <section class="info-local">
+    <section class="info">
       <a
         @click.prevent="
-          actualLocation = location;
-          activeList = 'individual';
-          backList = 'locations';
+          setActualLocation(location);
+          setActiveList('individual')
+          setBackList(backList);
         "
         >{{ location.name }}</a
       >
-      <div class="star-rating">
+      <section class="star-rating">
         <StarRating
           :rating="location.rating"
           :star-size="20"
@@ -20,10 +20,10 @@
         <span class="users-rating"
           >({{ location.user_ratings_total }} avaliações)</span
         >
-      </div>
+      </section>
       <p>{{ location.vicinity }}</p>
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 
 <script>
@@ -34,13 +34,16 @@ export default {
     StarRating
   },
   props: {
-    actualLocation: {
+    setActualLocation: {
       required: true
     },
     location: {
       required: true
     },
-    activeList: {
+    setActiveList: {
+      required: true
+    },
+    setBackList: {
       required: true
     },
     backList: {
