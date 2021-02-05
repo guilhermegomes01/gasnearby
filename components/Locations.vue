@@ -25,18 +25,26 @@
         />
         <section class="favorite-button">
           <button
-            v-if="!isFavorite(location)"
-            @click="addLocationToFavorites(location)"
+            class="add-wishlist"
+            @click="
+              !isFavorite(location)
+                ? addLocationToFavorites(location)
+                : removeFromFavorites(location)
+            "
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg
+              class="icon-favorite"
+              :class="{ active: isFavorite(location) }"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
               <path
-                d="M16.5,3C13.605,3,12,5.09,12,5.09S10.395,3,7.5,3C4.462,3,2,5.462,2,8.5c0,4.171,4.912,8.213,6.281,9.49 C9.858,19.46,12,21.35,12,21.35s2.142-1.89,3.719-3.36C17.088,16.713,22,12.671,22,8.5C22,5.462,19.538,3,16.5,3z M14.811,16.11 c-0.177,0.16-0.331,0.299-0.456,0.416c-0.751,0.7-1.639,1.503-2.355,2.145c-0.716-0.642-1.605-1.446-2.355-2.145 c-0.126-0.117-0.28-0.257-0.456-0.416C7.769,14.827,4,11.419,4,8.5C4,6.57,5.57,5,7.5,5c1.827,0,2.886,1.275,2.914,1.308L12,8 l1.586-1.692C13.596,6.295,14.673,5,16.5,5C18.43,5,20,6.57,20,8.5C20,11.419,16.231,14.827,14.811,16.11z"
+                d="M16.5,3C13.605,3,12,5.09,12,5.09S10.395,3,7.5,3C4.462,3,2,5.462,2,8.5c0,4.171,4.912,8.213,6.281,9.49 C9.858,19.46,12,21.35,12,21.35s2.142-1.89,3.719-3.36C17.088,16.713,22,12.671,22,8.5C22,5.462,19.538,3,16.5,3z"
               ></path>
             </svg>
-            Favoritar
+            {{ !isFavorite(location) ? "Favoritar" : "Desfavoritar" }}
           </button>
-          <span v-else>Favorito</span>
-        </section>
+        </div>
       </li>
     </ul>
     <div v-if="activeList === 'individual'" class="gas-stations-list">
@@ -47,7 +55,7 @@
       />
     </div>
     <ul v-if="activeList === 'favorites'" class="gas-stations-list">
-      <p v-if="favoriteLocations.length === 0">
+      <p class="empty-favorites" v-if="favoriteLocations.length === 0">
         Ainda não há nenhum local favorito :(
       </p>
       <li v-for="(location, index) in favoriteLocations" :key="index">
@@ -71,16 +79,22 @@ export default {
     }
   },
   data() {
+    const favoriteLocationStorage = JSON.parse(localStorage.getItem("@gas-nearby:favorites"));
     return {
       backList: "",
       activeList: "locations",
-      favoriteLocations: [],
+      favoriteLocations: favoriteLocationStorage ? favoriteLocationStorage : [],
       actualLocation: {}
     };
   },
   methods: {
     addLocationToFavorites(location) {
       return this.favoriteLocations.push(location);
+    },
+    removeFromFavorites(location) {
+      this.favoriteLocations = this.favoriteLocations.filter(
+        favoriteLocation => favoriteLocation.place_id !== location.place_id
+      );
     },
     isFavorite(location) {
       return this.favoriteLocations.find(
@@ -95,6 +109,14 @@ export default {
     },
     setActualLocation(location) {
       this.actualLocation = location;
+    }
+  },
+  watch: {
+    favoriteLocations() {
+      localStorage.setItem(
+        "@gas-nearby:favorites",
+        JSON.stringify(this.favoriteLocations)
+      );
     }
   }
 };
@@ -111,6 +133,7 @@ export default {
 .options-list button {
   background: transparent;
   font-size: 20px;
+  color: var(--tertiary);
 }
 
 .options-list button::after {
@@ -121,7 +144,7 @@ export default {
 }
 
 .options-list button.active::after {
-  background: #f44336;
+  background: var(--secondary);
 }
 
 .options-list button:hover {
@@ -140,18 +163,52 @@ export default {
 }
 
 .gas-stations-list::-webkit-scrollbar-thumb {
-  background-color: #06092b;
+  background-color: var(--tertiary);
+  border-radius: 5px;
 }
 
 .gas-stations-list::-webkit-scrollbar-track {
   background-color: #cecece;
+  border-radius: 5px;
 }
 
 .gas-stations-list .favorite-button {
   padding: 20px;
 }
 
+.gas-stations-list .favorite-button button.add-wishlist {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 16px;
+  padding: 0;
+}
+
+.gas-stations-list .favorite-button button:hover .icon-favorite {
+  fill: var(--primary);
+}
+
+.gas-stations-list .favorite-button .icon-favorite {
+  width: 30px;
+  stroke-width: 2px;
+  stroke: var(--primary);
+  fill: transparent;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+
+.gas-stations-list .favorite-button .icon-favorite.active {
+  fill: var(--primary);
+}
+
 .gas-stations-list li {
   border-bottom: 1px solid gray;
+}
+
+.gas-stations-list .empty-favorites {
+  padding: 20px;
+  text-align: center;
 }
 </style>
