@@ -1,11 +1,11 @@
 <template>
   <div class="container" v-if="locationsList">
-    <List :list="locationsList" />
+    <Locations :list="locationsList" />
     <Map :locationsList="locationsList" :actualLat="lat" :actualLng="lng" />
   </div>
-  <div v-else>
+  <!-- <div v-else>
     <p>Erro</p>
-  </div>
+  </div> -->
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
@@ -15,7 +15,6 @@ export default {
     return {
       lat: "",
       lng: "",
-      acessLocation: false
     };
   },
   computed: {
