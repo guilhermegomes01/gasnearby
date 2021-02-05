@@ -26,6 +26,8 @@ html {
 
 * {
   --primary: #F44336;
+  --secondary: #35BDAC;
+  --tertiary: #06092b;
 }
 
 *,
