@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <div v-if="activeList !== 'individual'" class="options-list">
+  <aside>
+    <section v-if="activeList !== 'individual'" class="options-list">
       <button
         :class="{ active: activeList === 'locations' }"
         @click="activeList = 'locations'"
@@ -13,7 +13,7 @@
       >
         Favoritos
       </button>
-    </div>
+    </section>
     <ul v-if="activeList === 'locations'" class="gas-stations-list">
       <li v-for="location in list" :key="location.place_id">
         <LocationInfo
@@ -23,7 +23,7 @@
           :setBackList="setBackList"
           :backList="'locations'"
         />
-        <div class="favorite-button">
+        <section class="favorite-button">
           <button
             v-if="!isFavorite(location)"
             @click="addLocationToFavorites(location)"
@@ -36,7 +36,7 @@
             Favoritar
           </button>
           <span v-else>Favorito</span>
-        </div>
+        </section>
       </li>
     </ul>
     <div v-if="activeList === 'individual'" class="gas-stations-list">
@@ -60,7 +60,7 @@
         />
       </li>
     </ul>
-  </section>
+  </aside>
 </template>
 
 <script>
