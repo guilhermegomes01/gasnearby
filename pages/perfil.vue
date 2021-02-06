@@ -1,14 +1,19 @@
 <template>
-<section>
-  <div class="container" v-if="locationsList">
-    {{ userInfo }}
-    <Locations :list="locationsList" />
-    <Map :locationsList="locationsList" :actualLat="lat" :actualLng="lng" />
-  </div>
-</section>
+  <section>
+    <div class="container" v-if="locationsList">
+      <section>
+        <section>
+          <p>{{ `${userInfo.first_name} ${userInfo.last_name}` }}</p>
+          <button @click="handleLogout()">Sair</button>
+        </section>
+        <Locations :list="locationsList" />
+      </section>
+      <Map :locationsList="locationsList" :actualLat="lat" :actualLng="lng" />
+    </div>
+  </section>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -17,7 +22,7 @@ export default {
       lng: ""
     };
   },
-  middleware: 'verifyIsLogged',
+  middleware: "verifyIsLogged",
   computed: {
     ...mapState("locations", {
       locationsList: state => state.geoLocations
@@ -27,7 +32,7 @@ export default {
     }),
     ...mapState("user", {
       userInfo: state => state.userInfo
-    }),
+    })
   },
   methods: {
     async getLocations() {
@@ -44,7 +49,14 @@ export default {
     },
     ...mapActions("user", {
       getUser: "GET_USER"
-    })
+    }),
+    ...mapMutations("auth", {
+      logOut: "LOGOUT"
+    }),
+    handleLogout() {
+      this.logOut();
+      this.$router.push("/");
+    }
   },
   created() {
     this.getLocations();
