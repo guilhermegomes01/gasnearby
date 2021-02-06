@@ -25,8 +25,6 @@
           <b>{{ location.name }}</b>
           <br />
           {{ location.vicinity }}
-          <br />
-          <button class="mapModal" @click="$store.dispatch('nav/toggleModal', location)">Ver mais</button>
         </GMapInfoWindow>
       </GMapMarker>
     </GMap>
@@ -37,7 +35,6 @@
 export default {
   props: {
     locationsList: {
-      type: Array,
       required: true,
     },
     actualLat: {
