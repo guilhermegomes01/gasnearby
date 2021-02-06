@@ -23,6 +23,17 @@
           :setBackList="setBackList"
           :backList="'locations'"
         />
+        <section class="create-rating">
+          <button
+            @click.prevent="
+              setActualLocation(location);
+              setActiveList('individual');
+              setBackList('locations');
+            "
+          >
+            Fazer avaliação
+          </button>
+        </section>
         <section class="favorite-button">
           <button
             class="add-wishlist"
@@ -44,16 +55,16 @@
             </svg>
             {{ !isFavorite(location) ? "Favoritar" : "Desfavoritar" }}
           </button>
-        </div>
+        </section>
       </li>
     </ul>
-    <div v-if="activeList === 'individual'" class="gas-stations-list">
+    <section v-if="activeList === 'individual'" class="gas-stations-list">
       <SingleLocation
         :actualLocation="actualLocation"
         :setActiveList="setActiveList"
         :backList="backList"
       />
-    </div>
+    </section>
     <ul v-if="activeList === 'favorites'" class="gas-stations-list">
       <p class="empty-favorites" v-if="favoriteLocations.length === 0">
         Ainda não há nenhum local favorito :(
@@ -79,7 +90,9 @@ export default {
     }
   },
   data() {
-    const favoriteLocationStorage = JSON.parse(localStorage.getItem("@gas-nearby:favorites"));
+    const favoriteLocationStorage = JSON.parse(
+      localStorage.getItem("@gas-nearby:favorites")
+    );
     return {
       backList: "",
       activeList: "locations",
@@ -170,6 +183,18 @@ export default {
 .gas-stations-list::-webkit-scrollbar-track {
   background-color: #cecece;
   border-radius: 5px;
+}
+
+.create-rating {
+  padding: 8px 20px;
+}
+
+.create-rating button {
+  background-color: var(--tertiary);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 24px;
+  transition: 0.7s;
 }
 
 .gas-stations-list .favorite-button {
