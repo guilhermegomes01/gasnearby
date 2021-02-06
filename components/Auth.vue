@@ -191,4 +191,13 @@ export default {
 .auth-button:hover {
   background-color: #9a0036;
 }
+
+@media (max-width: 767px) {
+  .container-auth .image-gas-station {
+    display: none;
+  }
+  .container-auth {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

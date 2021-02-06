@@ -108,4 +108,10 @@ export default {
   transition: .7s;
   margin-top: 2rem;
 }
+
+@media (max-width: 767px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
