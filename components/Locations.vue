@@ -168,7 +168,7 @@ export default {
 .gas-stations-list {
   overflow-y: auto;
   list-style: none;
-  height: calc(100vh - 68px);
+  height: calc(100vh - 223px);
 }
 
 .gas-stations-list::-webkit-scrollbar {
