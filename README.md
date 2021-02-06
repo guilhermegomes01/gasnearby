@@ -1,5 +1,12 @@
 ### GAS NEARBY
 
+## Credenciais para Login e Cadastro
+### Login
+E-mail: eve.holt@reqres.in
+Senha: (qualquer caractere)
+### Cadastro
+E-mail: eve.holt@reqres.in
+Senha: pistol
 ## Sobre
 
 Gas Nearby é um sistema que mostra os postos de gasolina mais próximo de você, tanto no mapa, quanto no formato lista. Você consegue fazer avaliações sobre o local que você deseja e, também, adicioná-lo à uma lista de postos de gasolina favoritos. 
